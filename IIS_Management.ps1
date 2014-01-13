@@ -12,6 +12,24 @@ Get-Website
 
 #**************************************************
 Write-Host ****************************************
+Write-Host Start and Stop: App Pools, Sites and the W3 Publishing Service
+Write-Host ****************************************
+#**************************************************
+
+Stop-WebAppPool DefaultAppPool
+Stop-Website "Default Web Site" 
+
+Stop-Service -Name W3SVC -Force #this is a good idea because sometimes the site's root directory gets locked even after stopping the app pool. 
+
+Write-Host 'Do stuff like deploy files'
+
+Start-Service -Name W3SVC 
+
+Start-WebAppPool DefaultAppPool
+Start-Website "Default Web Site"
+
+#**************************************************
+Write-Host ****************************************
 Write-Host Bindings
 Write-Host ****************************************
 #**************************************************
