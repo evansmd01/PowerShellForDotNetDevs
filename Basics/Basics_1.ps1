@@ -30,6 +30,27 @@ Write-Host $Concatentation.ToUpper()
 Write-Host $Concatentation.Substring("double or ".Length) 
 
 
+#**************************************************
+Write-Host ****************************************
+Write-Host Arrays
+Write-Host ****************************************
+#**************************************************
+
+$arr = @("a","b","c")
+Write-Host $arr
+
+#**************************************************
+Write-Host ****************************************
+Write-Host Hash Sets
+Write-Host ****************************************
+#**************************************************
+
+$hash = @{ 
+    "key1" = "value 1"; 
+    "key2" = "value 2" 
+}
+Write-Host $hash["key1"]
+
 
 #**************************************************
 Write-Host ****************************************
@@ -172,18 +193,39 @@ Write-Host Script Blocks
 Write-Host ****************************************
 #**************************************************
 
+
+$globalVar = "Anonymous functions are boss"
 [ScriptBlock]$Sb = {
-    Write-Host "Anonymous functions are boss."
+    Write-Host $globalVar
 }
 
 function Use-ScriptBlock(
     [ScriptBlock]$TheBlock
 ){
-    .$TheBlock
+    .$TheBlock #call it with the . (dot) operator    
 }
 
-#use the dot operator to call it
 Use-ScriptBlock $sb #notice I don't need to supply the param name if the order and type match up
+
+
+$whatAboutParams = {
+    Write-Host $args[0]
+}
+
+.$whatAboutParams hello
+
+$whatAboutNamedParams = {
+    param(
+        [string]$Message
+    )
+    Write-Host $Message
+}
+
+.$whatAboutNamedParams -Message "hello world"
+
+
+
+
 
 
 
